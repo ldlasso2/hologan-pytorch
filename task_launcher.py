@@ -164,7 +164,7 @@ def _image_handler(gan, out_dir, batch_size=32):
                         #padding = torch.zeros_like(rot['yaw'][0])+0.5
                         save_image( torch.cat(rot[key], dim=0),
                                     nrow=batch_size,
-                                    filename="%s/rot_%s_%i.png" % (out_dir, key, epoch) )
+                                    fp="%s/rot_%s_%i.png" % (out_dir, key, epoch) )
 
     return _image_handler
 
