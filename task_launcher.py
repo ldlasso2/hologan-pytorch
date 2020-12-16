@@ -158,7 +158,9 @@ def _image_handler(gan, out_dir, batch_size=32):
                     # TODO: do for valid as well
                     epoch = kwargs['epoch']
                     z_batch = gan.sample_z(batch_size)
-                    z_batch = z_batch.cuda()
+                    if(gan.use_cuda):
+                        z_batch = z_batch.cuda()
+                    
                     for key in ['x', 'y', 'z']:
                         rot = gan._generate_rotations(z_batch,
                                                       min_angle=gan.angles['min_angle_%s' % key],
