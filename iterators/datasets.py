@@ -38,3 +38,8 @@ class CarsDataset(ImageDataset):
         super().__init__(*args, **kwargs)
         self.files = glob.glob('%s/cars_test/*.jpg' % root) + \
             glob.glob("%s/cars_train/*.jpg" % root)
+
+class ChairsDataset(ImageDataset):
+    def __init__(self, root, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.files = glob.glob('%s/*.jpg' % root)

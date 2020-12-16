@@ -11,7 +11,7 @@ import string
 from torchvision.utils import save_image
 from torch.utils.data import DataLoader
 from iterators.datasets import (CelebADataset,
-                                CarsDataset)
+                                CarsDataset,ChairsDataset)
 from torchvision.transforms import transforms
 from architectures import arch
 from collections import OrderedDict
@@ -30,7 +30,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description="")
     parser.add_argument('--name', type=str, default=None)
     parser.add_argument('--dataset', type=str, default='celeba',
-                        choices=['celeba', 'cars'])
+                        choices=['celeba', 'cars','chairs'])
     parser.add_argument('--batch_size', type=int, default=32)
     parser.add_argument('--angles', type=str, default="[0,0,-45,45,0,0]",
                         help="""
@@ -109,9 +109,13 @@ train_transforms = [
 if args['dataset'] == 'celeba':
     ds = CelebADataset(root=os.environ['DATASET_CELEBA'],
                        transforms_=train_transforms)
-else:
+elif args['dataset'] == 'cars':
     ds = CarsDataset(root=os.environ['DATASET_CARS'],
                      transforms_=train_transforms)
+else:
+    ds = ChairsDataset(root=os.environ['DATASET_CHAIRS'],
+                     transforms_=train_transforms)
+                     
 loader = DataLoader(ds,
                     batch_size=args['batch_size'],
                     shuffle=True,
