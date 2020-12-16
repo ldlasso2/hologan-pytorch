@@ -167,9 +167,11 @@ class HoloGAN(GAN):
         # Train the generator.
         angles = self.sample_angles(z.size(0), **self.angles)
         thetas = self.get_theta(angles)
-        angles_t = torch.from_numpy(angles).float().cuda()
+        angles_t = torch.from_numpy(angles).float()
         if x.is_cuda:
             thetas = thetas.cuda()
+            angles_t = angles_t.cuda()
+            
         fake = self.g(z, thetas)
         d_fake, g_z_pred, g_t_pred = self.d(fake)
         gen_loss = self.loss(d_fake, 1)
