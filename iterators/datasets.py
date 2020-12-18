@@ -43,3 +43,10 @@ class ChairsDataset(ImageDataset):
     def __init__(self, root, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.files = glob.glob('%s/*.jpg' % root)
+
+class ChairsPngDataset(ImageDataset):
+    def __init__(self, root, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.files = glob.glob('%s/*.png' % root)
+
+
